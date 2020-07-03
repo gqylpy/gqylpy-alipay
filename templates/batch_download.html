@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/whole_center.css">
+    <title>资源分享</title>
+    <style>
+        .rsc-title > tr > th,
+        .rsc-list > tr > td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body id="body">
+<div class="jumbotron container">
+    <h2>title-1234567890</h2>
+    <p>包含以下列表中的所有资源</p>
+    <p id="download-p">
+        <a id="download-button" style="margin-left: 20px; margin-top: 10px;" onclick="clickDownloadButton()"
+           class="btn btn-primary btn-lg" href="/sd/rid-1234567890">
+            下载全部: size-1234567890
+        </a>
+    </p>
+    <div>
+        <table class="table table-hover table-striped">
+            <thead class="rsc-title">
+            <tr>
+                <th>序号</th>
+                <th>资源名称</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody class="rsc-list" id="rsc-list">
+            <!--Resource list-->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="/static/js/jquery-3.3.1.js"></script>
+<script>
+        function renderPage(data) {
+        let labels = '';
+        for (let i = 0; i < data.length; i++) {
+            labels += `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td>${data[i]}</td>
+                </tr>
+            `;
+        }
+        $('#rsc-list').append(labels);
+    }
+
+    function fetch_commodity() {
+        $.ajax({
+            url: '/batch_fetch',
+            type: 'GET',
+            data: {
+                rid: rid-1234567890,
+            },
+            success: function (data) {
+                renderPage(data);
+            }
+        })
+    }
+
+    (function () {
+        fetch_commodity();
+    })(jQuery);
+</script>
+</body>
+</html>

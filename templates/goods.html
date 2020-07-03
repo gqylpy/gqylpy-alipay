@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/whole_center.css">
+    <title>商品列表 - GQYLPY</title>
+    <style>
+        .commodity-title > tr > th,
+        .commodity_list > tr > td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="jumbotron container">
+    <h2>GQYLPY <span style="color: gray;">-</span> 商品列表</h2>
+    <table class="table table-hover table-striped">
+        <thead class="commodity-title">
+        <tr>
+            <th>商品序号</th>
+            <th>商品名称</th>
+            <th>预览商品</th>
+            <th>购买商品</th>
+        </tr>
+        </thead>
+        <tbody class="commodity_list" id="commodity_list">
+        <!--Commodity list-->
+        </tbody>
+    </table>
+</div>
+<div class="container">
+    <p style="color: gray;">站点仍在开发中，后续将上线更多商品，敬请关注！</p>
+</div>
+<script src="/static/js/jquery-3.3.1.js"></script>
+<script>
+    function renderPage(data) {
+        let labels = '';
+        for (let i = 0; i < data.length; i++) {
+            labels += `
+                <tr>
+                    <td>${data[i].id}</td>
+                    <td>${data[i].name}</td>
+                    <td><a href="${data[i].link}" target="_blank" type="button" class="btn btn-primary btn-xs">查看效果</a></td>
+                    <td><a href="/purchase_commodity/${data[i].id}" type="button" class="btn btn-danger btn-xs">购买: ${data[i].price}元</a></td>
+                </tr>
+            `;
+        }
+        $('#commodity_list').append(labels);
+    }
+
+    function fetch_commodity() {
+        $.ajax({
+            url: '/fetch_commodity',
+            type: 'GET',
+            success: function (data) {
+                renderPage(data);
+            }
+        })
+    }
+
+    (function () {
+        fetch_commodity();
+    })(jQuery);
+</script>
+</body>
+</html>

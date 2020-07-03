@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/whole_center.css">
+    <title>title-1234567890 - 下载</title>
+</head>
+<body id="body">
+<div class="jumbotron container">
+    <h2>title-1234567890</h2>
+    <p id="download-p">
+        <a id="download-button" style="margin-left: 20px; margin-top: 10px;" onclick="clickDownloadButton()"
+           class="btn btn-primary btn-lg" href="/sd/rid-1234567890">点击下载: size-1234567890
+        </a>
+    </p>
+</div>
+
+<!-- 主动向百度提交当前页面链接 -->
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+</body>
+</html>

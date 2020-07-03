@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/whole_center.css">
+    <title>查询订单</title>
+    <style>
+        #input-group-addon:hover {
+            font-size: 110%;
+            color: black;
+            transition: all 80ms linear;
+            padding-left: 11px;
+            padding-right: 11px;
+        }
+        #exampleInputAmount {
+            width: 300px;
+        }
+        #msg-label {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="jumbotron container">
+    <p>输入支付宝【账单】上的【订单号】，并点击查询按钮来查询您的订单</p>
+    <div class="form-group form-inline" id="search-box">
+        <label class="sr-only" for="exampleInputAmount"></label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="exampleInputAmount" placeholder="在这里输入订单号">
+            <div class="input-group-addon" id="input-group-addon" onClick="queryOrders()">
+                <span class="fa fa-search">查询</span>
+            </div>
+        </div>
+    </div>
+    <p id="msg-label"></p>
+</div>
+
+<script src="/static/js/jquery-3.3.1.js"></script>
+<script>
+    var $msgLabel = $('#msg-label');
+
+    function queryOrders() {
+        let tradeNo = $('#exampleInputAmount').val();
+        if (!tradeNo) {
+            return
+        }
+        $.ajax({
+            url: "/qo",
+            type: 'POST',
+            data: {
+                trade_no: tradeNo,
+            },
+            success: function (data) {
+                if (data.status) {
+                    $msgLabel.text('密码是: ' + data.pwd);
+                } else {
+                    $msgLabel.text(data.msg);
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>
