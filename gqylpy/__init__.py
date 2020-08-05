@@ -38,8 +38,7 @@ def create_app() -> 'Sanic app':
 @app.get('/')
 async def index(request):
     return response.html(
-        hd.come_on(hd.index_html, {'tip': INDEX_TIP})
-    )
+        hd.come_on(hd.index_html, {'tip': INDEX_TIP}))
 
 
 @app.middleware('response')
@@ -48,8 +47,7 @@ async def allow_cross_domain(request, response):
     response.headers.update({
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': '*',
-        'Access-Control-Allow-Headers': 'x-requested-with,content-type',
-    })
+        'Access-Control-Allow-Headers': 'x-requested-with,content-type'})
 
 
 @app.exception(Exception)
